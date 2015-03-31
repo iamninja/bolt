@@ -18,6 +18,19 @@
     <script src="{{ paths.theme }}javascripts/jquery-2.1.0.min.js"></script>
     <script src="{{ paths.theme }}javascripts/foundation.min.js"></script>
     <script src="{{ paths.theme }}javascripts/modernizr.js"></script>
+    <script src="{{ paths.theme }}bower_components/foundation/js/foundation/foundation.clearing.js"></script>
+    <script src="{{ paths.theme }}bower_components/slick.js/slick/slick.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('.slick-class').slick({
+                slidesToShow: 3,
+                arrows: true,
+                autoplay: true,
+                dots: true
+            });
+        });
+    </script>
 
     {# Bolt comes with Magnific Popup, as it's used in the backend. We can use it here, or you can
        just swap it out for the image-viewing script of your choice. Or delete it altogether. #}

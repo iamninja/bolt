@@ -36,19 +36,19 @@
        effectively creating a working link to that contenttpye's listing page.#}
 
     {% for ct in app.config.get('contenttypes') if not ct.viewless|default(false) %}
+        {% if (ct.slug != 'pages') and (ct.slug != 'showcases') %}
+          {% setcontent records = ct.slug ~ "/latest/3" %}
 
-        {% setcontent records = ct.slug ~ "/latest/5" %}
-
-        <h5>{{ __('contenttypes.generic.recent', {'%contenttypes%': ct.slug}) }}</h5>
-        <ul>
-            {% for record in records %}
-                <li><a href="{{ record.link }}">{{ record.title }}</a></li>
-            {% else %}
-                <li>{{ __('contenttypes.generic.no-recent', {'%contenttype%': ct.slug}) }}</li>
-            {% endfor %}
-        </ul>
-        <p><a href="{{ paths.root }}{{ct.slug}}">{{ __('contenttypes.generic.overview',{'%contenttypes%': ct.slug}) }} &raquo;</a></p>
-
+          <h5>{{ __('contenttypes.generic.recent', {'%contenttypes%': ct.slug}) }}</h5>
+          <ul>
+              {% for record in records %}
+                  <li><a href="{{ record.link }}">{{ record.title }}</a></li>
+              {% else %}
+                  <li>{{ __('contenttypes.generic.no-recent', {'%contenttype%': ct.slug}) }}</li>
+              {% endfor %}
+          </ul>
+          <p><a href="{{ paths.root }}{{ct.slug}}">{{ __('contenttypes.generic.overview',{'%contenttypes%': ct.slug}) }} &raquo;</a></p>
+        {% endif %}
 
     {% endfor %}
 

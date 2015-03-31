@@ -1,8 +1,27 @@
 {% include '_header.twig' %}
 
+
 <!-- Main Page Content and Sidebar -->
 
     <!-- Main Blog Content -->
+
+    <h4>{{ __('Latest news') }}</h4>
+    {% setcontent newsitems = "news/latest/2" %}
+    <div class="row">
+    {% for newsitem in newsitems %}
+        <div class="large-6 columns">
+            <div class="panel">
+                <h5><a href="{{ newsitem.link }}">{{ newsitem.title }}</a></h5>
+
+                {{ newsitem.excerpt }}
+
+                <p class="meta"><a href="{{ newsitem.link }}">Link</a> -
+                Posted by {{ newsitem.user.displayname }}
+                on {{ newsitem.datecreated|date("M d, ’y")}}</p>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
     <div class="large-8 columns">
 
         <article>
@@ -15,13 +34,22 @@
                     <h1>{{ home.title }}</h1>
                 {% endif %}
 
-                {% if home.image is defined and home.image is not empty %}
+                {# {% if home.image is defined and home.image is not empty %}
                     <div class="large-5 columns imageholder">
                         <a href="{{ image(home.image) }}">
                             <img src="{{ thumbnail(home.image, 696, 400) }}">
                         </a>
                     </div>
+                {% endif %} #}
+                <div class="slick-class">
+                {% if home.imagelist is defined and home.imagelist is not empty %}
+                    {% for pic in home.imagelist %}
+                        <div>
+                            <img src="{{ thumbnail(pic, 150, 150) }}" alt="">
+                        </div>
+                    {% endfor %}
                 {% endif %}
+                </div>
 
                 {# display something introduction-like.. #}
                 {% if home.introduction is defined and home.introduction is not empty %}
